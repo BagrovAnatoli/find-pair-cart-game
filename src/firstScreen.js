@@ -1,5 +1,40 @@
 function renderFirstScreen(component) {
     component.appendChild(templateEngine(firstScreenTemplate));
+
+    setDifficultyHandler(component);
+
+    setStartHandler(component);
+}
+
+function setDifficultyHandler(component) {
+    const difficultyBlock = component.querySelector('.difficulty');
+    difficultyBlock.addEventListener('click', (event) => {
+        const target = event.target;
+        clearSelect(difficultyBlock);
+        if (target.classList.contains('difficulty__button')) {
+            window.appState.difficulty = target.dataset.difficulty;
+            console.log(`Выбрана сложность ${window.appState.difficulty}`);
+            target.classList.add('difficulty__button_selected');
+        }
+    });
+}
+
+function clearSelect(difficultyBlock) {
+    const buttons = difficultyBlock.querySelectorAll('.difficulty__button');
+    buttons.forEach(button => {
+        button.classList.remove('difficulty__button_selected');
+    });
+}
+
+function setStartHandler(component) {
+    const startButton = component.querySelector('.button');
+    startButton.addEventListener('click', (event) => {
+        event.preventDefault;
+        console.log(`Открыть игру на сложности ${window.appState.difficulty}`);
+        clearElement(component);
+        window.timer.start();
+        renderGameScreen(component);
+    });
 }
 
 const firstScreenTemplate = {
@@ -38,7 +73,7 @@ const firstScreenTemplate = {
 
 function templateDifficultyButton(difficultyNumber) {
     return {
-        div: 'div',
+        tag: 'div',
         cls: 'difficulty__button',
         attrs: {
             'data-difficulty': `${difficultyNumber}`,

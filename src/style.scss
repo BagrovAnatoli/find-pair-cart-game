@@ -50,6 +50,7 @@ body {
         font-family: 'StratosSkyeng', sans-serif;
         font-style: normal;
         font-size: 24px;
+        cursor: pointer;
     }
 }
 
@@ -69,5 +70,11 @@ body {
         display: flex;
         align-items: center;
         justify-content: center;
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s;
+        &_selected {
+            transform: scale(1.05);
+            box-shadow: 10px 5px 5px #0080C1;
+        }
     }
 }
