@@ -40,18 +40,19 @@ body {
         text-align: center;
         font-feature-settings: 'pnum' on, 'lnum' on;
     }
-    &__button {
-        width: 246px;
-        height: 50px;
-        border: none;
-        border-radius: 12px;
-        background-color: #7AC100;
-        color: #fff;
-        font-family: 'StratosSkyeng', sans-serif;
-        font-style: normal;
-        font-size: 24px;
-        cursor: pointer;
-    }
+}
+
+.button {
+    width: 246px;
+    height: 50px;
+    border: none;
+    border-radius: 12px;
+    background-color: #7AC100;
+    color: #fff;
+    font-family: 'StratosSkyeng', sans-serif;
+    font-style: normal;
+    font-size: 24px;
+    cursor: pointer;
 }
 
 .difficulty {
@@ -77,4 +78,49 @@ body {
             box-shadow: 10px 5px 5px #0080C1;
         }
     }
+}
+
+.game {
+    height: 100%;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.timer {
+    display: flex;
+    align-items: end;
+    color: #fff;
+    &__min, &__sec {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+    }
+    &__label {
+        font-size: 16px;
+    }
+    &__value {
+        font-size: 64px;
+        line-height: 64px;
+    }
+}
+
+.field {
+    display: grid;
+    justify-items: center;
+}
+
+.cart {
+    width: 95px;
+    height: 133px;
+    background-image: url(./img/rubashka.svg);
+    margin: 10px 0;
+    cursor: pointer;
 }

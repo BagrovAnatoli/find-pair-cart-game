@@ -10,7 +10,23 @@ window.appState = {
 
 window.timer = new Timer();
 
-renderFirstScreen (appElement);
+window.DIFFICULTY = [6,12,18];
+window.GRIDS = [
+    {
+        rows: 2,
+        columns: 3
+    },
+    {
+        rows: 3,
+        columns: 4
+    },
+    {
+        rows: 3,
+        columns: 6
+    }
+];
+
+renderFirstScreen(appElement);
 
 function clearElement(element) {
     element.textContent = '';
