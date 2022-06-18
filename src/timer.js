@@ -1,8 +1,8 @@
 class Timer {
     constructor() {
         console.log('new Timer');
-        console.log(window.appState.time.min);
-        console.log(window.appState.time.sec);
+        console.log(window.appState.gameDuration.min);
+        console.log(window.appState.gameDuration.sec);
     }
 
     start() {
@@ -21,16 +21,16 @@ class Timer {
 
     saveTime(ms) {
         const sec = Math.floor(ms / 1000);
-        window.appState.time.min = Math.floor(sec / 60);
-        window.appState.time.sec = sec % 60;
+        window.appState.gameDuration.min = Math.floor(sec / 60);
+        window.appState.gameDuration.sec = sec % 60;
     }
 
     displayTime() {
         if (!this.minutesElement || !this.secondsElement) {
             return;
         }
-        this.minutesElement.textContent = String(window.appState.time.min).padStart(2,0);
-        this.secondsElement.textContent = String(window.appState.time.sec).padStart(2,0);
+        this.minutesElement.textContent = String(window.appState.gameDuration.min).padStart(2,0);
+        this.secondsElement.textContent = String(window.appState.gameDuration.sec).padStart(2,0);
     }
 
     setTimeElements(minutesEment, secondsElement) {
