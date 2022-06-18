@@ -7,21 +7,32 @@ window.appState = {
 
 window.timer = new Timer();
 
-window.DIFFICULTY = [6,12,18];
-window.GRIDS = [
-    {
-        rows: 2,
-        columns: 3
+window.DIFFICULTIES = {
+    low: {
+        buttonText: '1',
+        cartsCount: 6,
+        layout: {
+            rows: 2,
+            columns: 3
+        }
     },
-    {
-        rows: 3,
-        columns: 4
+    medium: {
+        buttonText: '2',
+        cartsCount: 12,
+        layout: {
+            rows: 3,
+            columns: 4
+        }
     },
-    {
-        rows: 3,
-        columns: 6
+    high: {
+        buttonText: '3',
+        cartsCount: 18,
+        layout: {
+            rows: 3,
+            columns: 6
+        }
     }
-];
+};
 
 renderFirstScreen(appElement);
 

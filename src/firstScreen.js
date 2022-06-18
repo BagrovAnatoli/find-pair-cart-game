@@ -1,5 +1,5 @@
 function renderFirstScreen(component) {
-    component.appendChild(templateEngine(firstScreenTemplate));
+    component.appendChild(templateEngine(firstScreenTemplate()));
 
     setDifficultyHandler(component);
 
@@ -37,48 +37,50 @@ function setStartHandler(component) {
     });
 }
 
-const firstScreenTemplate = {
-    tag: 'div',
-    cls: 'screen',
-    content: {
+function firstScreenTemplate() {
+    return {
         tag: 'div',
-        cls: 'window',
+        cls: 'screen',
         content: {
             tag: 'div',
-            cls: 'window__content',
-            content: [
-                {
-                    tag: 'div',
-                    cls: 'window__title',
-                    content: 'Выбери сложность'
-                },
-                {
-                    tag: 'div',
-                    cls: 'difficulty',
-                    content: [
-                        templateDifficultyButton(1),
-                        templateDifficultyButton(2),
-                        templateDifficultyButton(3),
-                    ]
-                },
-                {
-                    tag: 'button',
-                    cls: ['button', 'window__button'],
-                    content: 'Старт'
-                }
-            ]
+            cls: 'window',
+            content: {
+                tag: 'div',
+                cls: 'window__content',
+                content: [
+                    {
+                        tag: 'div',
+                        cls: 'window__title',
+                        content: 'Выбери сложность'
+                    },
+                    {
+                        tag: 'div',
+                        cls: 'difficulty',
+                        content: [
+                            templateDifficultyButton('low'),
+                            templateDifficultyButton('medium'),
+                            templateDifficultyButton('high'),
+                        ]
+                    },
+                    {
+                        tag: 'button',
+                        cls: ['button', 'window__button'],
+                        content: 'Старт'
+                    }
+                ]
+            }
         }
     }
 };
 
-function templateDifficultyButton(difficultyNumber) {
+function templateDifficultyButton(difficulty) {
     return {
         tag: 'div',
         cls: 'difficulty__button',
         attrs: {
-            'data-difficulty': `${difficultyNumber}`,
+            'data-difficulty': `${difficulty}`,
         },
-        content: `${difficultyNumber}`
+        content: `${window.DIFFICULTIES[difficulty].buttonText}`
     }
 }
 

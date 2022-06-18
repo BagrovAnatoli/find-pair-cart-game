@@ -96,16 +96,16 @@ function gameScreenTemplate() {
 
 function setGridStyle() {
     const difficulty = window.appState.difficulty;
-    const grid = window.GRIDS[+difficulty - 1];
+    const layout = window.DIFFICULTIES[difficulty].layout;
     return {
-        style: `grid-template-columns: repeat(${grid.columns}, 1fr);grid-template-rows: repeat(${grid.rows}, 1fr);`
+        style: `grid-template-columns: repeat(${layout.columns}, 1fr);grid-template-rows: repeat(${layout.rows}, 1fr);`
     };
 }
 
 function renderCarts() {
     const difficulty = window.appState.difficulty;
     const carts = [];
-    const cartsCount = window.DIFFICULTY[+difficulty - 1];
+    const cartsCount = window.DIFFICULTIES[difficulty].cartsCount;
     console.log('Количество карт: ' + cartsCount);
     for(let i = 1; i<=cartsCount; i++) {
         carts.push(renderCart(i));
