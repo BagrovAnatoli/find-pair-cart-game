@@ -1,16 +1,14 @@
 class Timer {
     constructor() {
         console.log('new Timer');
-        console.log(window.appState.gameDuration.min);
-        console.log(window.appState.gameDuration.sec);
+        console.log(window.appState.gameDuration);
     }
 
-    start() {
-        this._start = Date.now();
+    run() {
+        const startTime = Date.now();
         this.interval = setInterval(() => {
-            const current = Date.now();
-            const timeMilliseconds = current - this._start;
-            this.saveTime(timeMilliseconds);
+            const currentTime = Date.now();
+            window.appState.gameDuration = currentTime - startTime;
             this.displayTime();
         }, 1000);
     }
@@ -19,18 +17,20 @@ class Timer {
         clearInterval(this.interval);
     }
 
-    saveTime(ms) {
-        const sec = Math.floor(ms / 1000);
-        window.appState.gameDuration.min = Math.floor(sec / 60);
-        window.appState.gameDuration.sec = sec % 60;
-    }
-
     displayTime() {
         if (!this.minutesElement || !this.secondsElement) {
             return;
         }
-        this.minutesElement.textContent = String(window.appState.gameDuration.min).padStart(2,0);
-        this.secondsElement.textContent = String(window.appState.gameDuration.sec).padStart(2,0);
+        this.minutesElement.textContent = this.formatMinutes();
+        this.secondsElement.textContent = this.formatSeconds();
+    }
+
+    formatMinutes() {
+        return String(Math.floor(window.appState.gameDuration / 60000)).padStart(2, 0);
+    }
+
+    formatSeconds() {
+        return String(Math.floor(window.appState.gameDuration / 1000) % 60).padStart(2, 0);
     }
 
     setTimeElements(minutesEment, secondsElement) {

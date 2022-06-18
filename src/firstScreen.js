@@ -32,7 +32,7 @@ function setStartHandler(component) {
         event.preventDefault;
         console.log(`Открыть игру на сложности ${window.appState.difficulty}`);
         clearElement(component);
-        window.timer.start();
+        window.timer.run();
         renderGameScreen(component);
     });
 }

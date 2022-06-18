@@ -2,10 +2,7 @@ const appElement = document.querySelector('.app');
 
 window.appState = {
     difficulty: null,
-    gameDuration: {
-        min: 0,
-        sec: 0
-    }
+    gameDuration: 0
 }
 
 window.timer = new Timer();
