@@ -21,16 +21,20 @@ class Timer {
         if (!this.minutesElement || !this.secondsElement) {
             return;
         }
-        this.minutesElement.textContent = this.formatMinutes();
-        this.secondsElement.textContent = this.formatSeconds();
+        this.minutesElement.textContent = this.formatValues(this.getMinutes());
+        this.secondsElement.textContent = this.formatValues(this.getSeconds());
     }
 
-    formatMinutes() {
-        return String(Math.floor(window.appState.gameDuration / 60000)).padStart(2, 0);
+    getMinutes() {
+        return Math.floor(window.appState.gameDuration / 60000);
     }
 
-    formatSeconds() {
-        return String(Math.floor(window.appState.gameDuration / 1000) % 60).padStart(2, 0);
+    getSeconds() {
+        return Math.floor(window.appState.gameDuration / 1000) % 60;
+    }
+
+    formatValues(value) {
+        return String(value).padStart(2, 0);
     }
 
     setTimeElements(minutesEment, secondsElement) {
