@@ -1,4 +1,4 @@
-class Timer {
+export class Timer {
     constructor() {
         console.log('new Timer');
         console.log(window.appState.gameDuration);

@@ -1,3 +1,8 @@
+import { templateEngine } from './lib/templateEngine';
+import { clearElement } from './functions';
+import { renderFirstScreen } from './firstScreen';
+import { appElement } from './main';
+
 function renderGameScreen(component) {
     console.log(`Игра на сложности ${window.appState.difficulty}`);
     component.appendChild(templateEngine(gameScreenTemplate()));
@@ -32,65 +37,65 @@ function gameScreenTemplate() {
                 {
                     tag: 'div',
                     cls: 'header',
-                    content:[
+                    content: [
                         {
                             tag: 'div',
                             cls: 'timer',
-                            content:[
+                            content: [
                                 {
                                     tag: 'div',
                                     cls: 'timer__min',
-                                    content:[
+                                    content: [
                                         {
                                             tag: 'div',
                                             cls: 'timer__label',
-                                            content: 'min'
+                                            content: 'min',
                                         },
                                         {
                                             tag: 'div',
                                             cls: 'timer__value',
-                                            content: '00'
-                                        }
-                                    ]
+                                            content: '00',
+                                        },
+                                    ],
                                 },
                                 {
                                     tag: 'div',
                                     cls: 'timer__value',
-                                    content: '.'
+                                    content: '.',
                                 },
                                 {
                                     tag: 'div',
                                     cls: 'timer__sec',
-                                    content:[
+                                    content: [
                                         {
                                             tag: 'div',
                                             cls: 'timer__label',
-                                            content: 'sec'
+                                            content: 'sec',
                                         },
                                         {
                                             tag: 'div',
                                             cls: 'timer__value',
-                                            content: '00'
-                                        }
-                                    ]
+                                            content: '00',
+                                        },
+                                    ],
                                 },
-                            ]
+                            ],
                         },
                         {
                             tag: 'button',
                             cls: 'button',
-                            content: 'Начать заново'
+                            content: 'Начать заново',
                         },
-                    ]
+                    ],
                 },
                 {
                     tag: 'div',
                     cls: 'field',
                     attrs: setGridStyle(),
-                    content: renderCarts()
-                }
-            ]
-        }
+                    content: renderCarts(),
+                },
+            ],
+        },
     };
 }
 
@@ -98,7 +103,7 @@ function setGridStyle() {
     const difficulty = window.appState.difficulty;
     const layout = window.DIFFICULTIES[difficulty].layout;
     return {
-        style: `grid-template-columns: repeat(${layout.columns}, 1fr);grid-template-rows: repeat(${layout.rows}, 1fr);`
+        style: `grid-template-columns: repeat(${layout.columns}, 1fr);grid-template-rows: repeat(${layout.rows}, 1fr);`,
     };
 }
 
@@ -107,7 +112,7 @@ function renderCarts() {
     const carts = [];
     const cartsCount = window.DIFFICULTIES[difficulty].cartsCount;
     console.log('Количество карт: ' + cartsCount);
-    for(let i = 1; i<=cartsCount; i++) {
+    for (let i = 1; i <= cartsCount; i++) {
         carts.push(renderCart(i));
     }
     return carts;
@@ -118,11 +123,12 @@ function renderCart(number) {
     return {
         tag: 'div',
         cls: 'cart',
-        content: ''
+        content: '',
     };
 }
 
-{/* <div class="screen">
+{
+    /* <div class="screen">
     <div class="game">
         <div class="header">
             <div class="timer">
@@ -177,4 +183,7 @@ function renderCart(number) {
             <div class="cart">36</div>
         </div>
     </div>
-</div> */}
+</div> */
+}
+
+export { renderGameScreen };

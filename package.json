@@ -1,0 +1,43 @@
+{
+    "name": "git-game-project",
+    "version": "1.0.0",
+    "description": "Моя реализация игры из четвёртого модуля курса SkyPRO.\r Суть этой карточной игры: вам нужно выбрать все пары карт.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "http-server -p 3001",
+        "format": "prettier --write .",
+        "lint:js": "eslint ./src/**.js",
+        "lint:css": "stylelint ./src/**/*.css",
+        "lint:scss": "stylelint ./src/**/*.scss",
+        "lint": "npm run lint:js && npm run lint:scss",
+        "prepare": "husky install"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/BagrovAnatoli/find-pair-cart-game.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/BagrovAnatoli/find-pair-cart-game/issues"
+    },
+    "homepage": "https://github.com/BagrovAnatoli/find-pair-cart-game#readme",
+    "dependencies": {
+        "http-server": "^14.1.1"
+    },
+    "devDependencies": {
+        "eslint": "^8.18.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "husky": "^8.0.1",
+        "prettier": "^2.7.1",
+        "stylelint": "^14.9.1",
+        "stylelint-config-prettier": "^9.0.3",
+        "stylelint-config-standard": "^26.0.0",
+        "stylelint-config-standard-scss": "^4.0.0",
+        "stylelint-prettier": "^2.0.0",
+        "stylelint-scss": "^4.2.0"
+    }
+}

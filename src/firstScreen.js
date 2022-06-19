@@ -1,3 +1,7 @@
+import { templateEngine } from './lib/templateEngine';
+import { clearElement } from './functions';
+import { renderGameScreen } from './gameScreen';
+
 function renderFirstScreen(component) {
     component.appendChild(templateEngine(firstScreenTemplate()));
 
@@ -21,7 +25,7 @@ function setDifficultyHandler(component) {
 
 function clearSelect(difficultyBlock) {
     const buttons = difficultyBlock.querySelectorAll('.difficulty__button');
-    buttons.forEach(button => {
+    buttons.forEach((button) => {
         button.classList.remove('difficulty__button_selected');
     });
 }
@@ -51,7 +55,7 @@ function firstScreenTemplate() {
                     {
                         tag: 'div',
                         cls: 'window__title',
-                        content: 'Выбери сложность'
+                        content: 'Выбери сложность',
                     },
                     {
                         tag: 'div',
@@ -60,18 +64,18 @@ function firstScreenTemplate() {
                             templateDifficultyButton('low'),
                             templateDifficultyButton('medium'),
                             templateDifficultyButton('high'),
-                        ]
+                        ],
                     },
                     {
                         tag: 'button',
                         cls: ['button', 'window__button'],
-                        content: 'Старт'
-                    }
-                ]
-            }
-        }
-    }
-};
+                        content: 'Старт',
+                    },
+                ],
+            },
+        },
+    };
+}
 
 function templateDifficultyButton(difficulty) {
     return {
@@ -80,11 +84,12 @@ function templateDifficultyButton(difficulty) {
         attrs: {
             'data-difficulty': `${difficulty}`,
         },
-        content: `${window.DIFFICULTIES[difficulty].buttonText}`
-    }
+        content: `${window.DIFFICULTIES[difficulty].buttonText}`,
+    };
 }
 
-{/* <div class="screen">
+{
+    /* <div class="screen">
     <div class="window">
         <div class="window__content">
             <div class="window__title">Выбери сложность</div>
@@ -96,4 +101,7 @@ function templateDifficultyButton(difficulty) {
             <button class="button window__button">Старт</button>
         </div>
     </div>
-</div> */}
+</div> */
+}
+
+export { renderFirstScreen };
