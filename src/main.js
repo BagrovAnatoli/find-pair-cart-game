@@ -1,5 +1,5 @@
 import { Timer } from './timer.js';
-import { renderFirstScreen } from './firstScreen';
+import { renderFirstScreen } from './firstScreen.js';
 
 const appElement = document.querySelector('.app');
 

@@ -1,6 +1,6 @@
-import { templateEngine } from './lib/templateEngine';
-import { clearElement } from './functions';
-import { renderGameScreen } from './gameScreen';
+import { templateEngine } from './lib/templateEngine.js';
+import { clearElement } from './functions.js';
+import { renderGameScreen } from './gameScreen.js';
 
 function renderFirstScreen(component) {
     component.appendChild(templateEngine(firstScreenTemplate()));

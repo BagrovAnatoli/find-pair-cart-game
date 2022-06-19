@@ -1,7 +1,7 @@
-import { templateEngine } from './lib/templateEngine';
-import { clearElement } from './functions';
-import { renderFirstScreen } from './firstScreen';
-import { appElement } from './main';
+import { templateEngine } from './lib/templateEngine.js';
+import { clearElement } from './functions.js';
+import { renderFirstScreen } from './firstScreen.js';
+import { appElement } from './main.js';
 
 function renderGameScreen(component) {
     console.log(`Игра на сложности ${window.appState.difficulty}`);
