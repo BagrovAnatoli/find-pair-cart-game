@@ -1,5 +1,6 @@
 import { Timer } from './timer.js';
 import { renderFirstScreen } from './firstScreen.js';
+import { mixArrays } from './functions.js';
 
 const appElement = document.querySelector('.app');
 
@@ -36,6 +37,14 @@ window.DIFFICULTIES = {
         },
     },
 };
+
+const SUITS = ['hearts', 'diamonds', 'crosses', 'spades'];
+
+const RANKS = ['6', '7', '8', '9', '10', 'Q', 'K', 'J', 'A'];
+
+window.CARTS = mixArrays(SUITS, RANKS, 'suit', 'rank');
+
+console.log(window.CARTS);
 
 renderFirstScreen(appElement);
 
