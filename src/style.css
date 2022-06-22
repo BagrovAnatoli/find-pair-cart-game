@@ -4,11 +4,11 @@
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: sans-serif;
 }
 
 .screen {
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   background-color: #004980;
 }
@@ -50,7 +50,7 @@ body {
 .window__title {
   width: 250px;
   color: #004980;
-  font-family: 'StratosSkyeng', sans-serif;
+  font-family: sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 40px;
@@ -67,7 +67,7 @@ body {
   border-radius: 12px;
   background-color: #7ac100;
   color: #fff;
-  font-family: 'StratosSkyeng', sans-serif;
+  font-family: sans-serif;
   font-style: normal;
   font-size: 24px;
   cursor: pointer;
@@ -89,7 +89,7 @@ body {
   border-radius: 12px;
   background-color: #fff;
   color: #0080c1;
-  font-family: 'StratosSkyeng', sans-serif;
+  font-family: sans-serif;
   font-style: normal;
   font-size: 64px;
   display: -webkit-box;

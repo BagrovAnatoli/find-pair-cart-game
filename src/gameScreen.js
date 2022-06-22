@@ -9,6 +9,7 @@ function renderGameScreen(component) {
 
     setPlayAgainHandler(component);
     setTimer(component);
+    setCartClickHandler(component);
 }
 
 function setPlayAgainHandler(component) {
@@ -24,6 +25,32 @@ function setTimer(component) {
     const minutesElement = component.querySelector('.timer__min .timer__value');
     const secondsElement = component.querySelector('.timer__sec .timer__value');
     window.timer.setTimeElements(minutesElement, secondsElement);
+}
+
+function setCartClickHandler(component) {
+    const cartsField = component.querySelector('.field');
+    cartsField.addEventListener('click', (event) => {
+        const target = event.target;
+        if (!target.classList.contains('cart')) {
+            return;
+        }
+        rotateCart(target);
+    });
+}
+
+function rotateCart(cartElement) {
+    const suit = cartElement.dataset.suit;
+    const rank = cartElement.dataset.rank;
+    const side = cartElement.dataset.side;
+    console.log(rank, suit, side);
+    if (side === 'front') {
+        cartElement.style = '';
+        cartElement.dataset.side = 'back';
+    }
+    if (side === 'back') {
+        cartElement.style = `background-image: url('./src/img/${rank}_${suit}.svg');`;
+        cartElement.dataset.side = 'front';
+    }
 }
 
 function gameScreenTemplate() {
@@ -113,16 +140,26 @@ function renderCarts() {
     const cartsCount = window.DIFFICULTIES[difficulty].cartsCount;
     console.log('Количество карт: ' + cartsCount);
     for (let i = 1; i <= cartsCount; i++) {
-        carts.push(renderCart(i));
+        const id = i;
+        carts.push(renderCart(id));
     }
     return carts;
 }
 
-function renderCart(number) {
-    console.log('Карта № ' + number);
+function renderCart(id) {
+    console.log('Карта № ' + id);
+    const cart = window.CARTS[id - 1];
+    const { suit, rank } = cart;
     return {
         tag: 'div',
         cls: 'cart',
+        attrs: {
+            'data-id': id,
+            'data-suit': suit,
+            'data-rank': rank,
+            'data-side': 'front',
+            style: `background-image: url('./src/img/${rank}_${suit}.svg');`,
+        },
         content: '',
     };
 }
