@@ -7,9 +7,15 @@ function renderGameScreen(component) {
     console.log(`Игра на сложности ${window.appState.difficulty}`);
     component.appendChild(templateEngine(gameScreenTemplate()));
 
-    setPlayAgainHandler(component);
     setTimer(component);
-    setCartClickHandler(component);
+    setPlayAgainHandler(component);
+    const timeoutForRemember = setTimeout(() => {
+        console.log('5 секунд прошли');
+        turnAllCards(component);
+        window.timer.run();
+        setCartClickHandler(component);
+        clearTimeout(timeoutForRemember);
+    }, 5000);
 }
 
 function setPlayAgainHandler(component) {
@@ -31,26 +37,42 @@ function setCartClickHandler(component) {
     const cartsField = component.querySelector('.field');
     cartsField.addEventListener('click', (event) => {
         const target = event.target;
-        if (!target.classList.contains('cart')) {
+        const cart = target.closest('.cart');
+        if (!cart) {
             return;
         }
-        rotateCart(target);
+        turnCart(cart);
     });
 }
 
-function rotateCart(cartElement) {
+function turnCart(cartElement) {
     const suit = cartElement.dataset.suit;
     const rank = cartElement.dataset.rank;
     const side = cartElement.dataset.side;
     console.log(rank, suit, side);
     if (side === 'front') {
-        cartElement.style = '';
+        cartElement
+            .querySelector('.cart__front')
+            .classList.add('cart__front_hidden');
+        cartElement
+            .querySelector('.cart__back')
+            .classList.remove('cart__back_hidden');
         cartElement.dataset.side = 'back';
     }
     if (side === 'back') {
-        cartElement.style = `background-image: url('./src/img/${rank}_${suit}.svg');`;
+        cartElement
+            .querySelector('.cart__back')
+            .classList.add('cart__back_hidden');
+        cartElement
+            .querySelector('.cart__front')
+            .classList.remove('cart__front_hidden');
         cartElement.dataset.side = 'front';
     }
+}
+
+function turnAllCards(component) {
+    const carts = component.querySelectorAll('.cart');
+    carts.forEach(turnCart);
 }
 
 function gameScreenTemplate() {
@@ -158,9 +180,23 @@ function renderCart(id) {
             'data-suit': suit,
             'data-rank': rank,
             'data-side': 'front',
-            style: `background-image: url('./src/img/${rank}_${suit}.svg');`,
         },
-        content: '',
+        content: [
+            {
+                tag: 'div',
+                cls: ['cart__front'],
+                attrs: {
+                    style: `background-image: url('./src/img/${rank}_${suit}.svg');`,
+                },
+            },
+            {
+                tag: 'div',
+                cls: ['cart__back', 'cart__back_hidden'],
+                attrs: {
+                    style: `background-image: url('./src/img/shirt.svg');`,
+                },
+            },
+        ],
     };
 }
 

@@ -179,10 +179,16 @@ body {
 }
 
 .cart {
-  width: 95px;
-  height: 133px;
-  background-image: url("./img/shirt.svg");
   margin: 10px 0;
   cursor: pointer;
+}
+
+.cart__front, .cart__back {
+  width: 95px;
+  height: 133px;
+}
+
+.cart__front_hidden, .cart__back_hidden {
+  display: none;
 }
 /*# sourceMappingURL=style.css.map */
