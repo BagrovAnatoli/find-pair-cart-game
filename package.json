@@ -8,7 +8,6 @@
         "start": "http-server -p 3001",
         "format": "prettier --write .",
         "lint:js": "eslint ./src/**.js",
-        "lint:css": "stylelint ./src/**/*.css",
         "lint:scss": "stylelint ./src/**/*.scss",
         "lint": "npm run lint:js && npm run lint:scss",
         "prepare": "husky install"

@@ -1,6 +1,6 @@
 import { Timer } from './timer.js';
 import { renderFirstScreen } from './firstScreen.js';
-import { mixArrays } from './functions.js';
+import { mixArrays } from './lib/utilityFunctions.js';
 
 const appElement = document.querySelector('.app');
 

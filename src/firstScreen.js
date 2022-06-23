@@ -1,5 +1,5 @@
 import { templateEngine } from './lib/templateEngine.js';
-import { clearElement } from './functions.js';
+import { clearElement } from './lib/utilityFunctions.js';
 import { renderGameScreen } from './gameScreen.js';
 
 function renderFirstScreen(component) {
@@ -85,22 +85,6 @@ function templateDifficultyButton(difficulty) {
         },
         content: `${window.DIFFICULTIES[difficulty].buttonText}`,
     };
-}
-
-{
-    /* <div class="screen">
-    <div class="window">
-        <div class="window__content">
-            <div class="window__title">Выбери сложность</div>
-            <div class="difficulty">
-                <div class="difficulty__button" data-difficulty="1">1</div>
-                <div class="difficulty__button" data-difficulty="2">2</div>
-                <div class="difficulty__button" data-difficulty="3">3</div>
-            </div>
-            <button class="button window__button">Старт</button>
-        </div>
-    </div>
-</div> */
 }
 
 export { renderFirstScreen };

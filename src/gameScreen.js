@@ -1,5 +1,5 @@
 import { templateEngine } from './lib/templateEngine.js';
-import { clearElement } from './functions.js';
+import { clearElement } from './lib/utilityFunctions.js';
 import { renderFirstScreen } from './firstScreen.js';
 import { appElement } from './main.js';
 
@@ -36,7 +36,7 @@ function setTimer(component) {
 function setCartClickHandler(component) {
     const cartsField = component.querySelector('.field');
     cartsField.addEventListener('click', (event) => {
-        const target = event.target;
+        const { target } = event;
         const cart = target.closest('.cart');
         if (!cart) {
             return;
@@ -46,9 +46,7 @@ function setCartClickHandler(component) {
 }
 
 function turnCart(cartElement) {
-    const suit = cartElement.dataset.suit;
-    const rank = cartElement.dataset.rank;
-    const side = cartElement.dataset.side;
+    const { suit, rank, side } = cartElement.dataset;
     console.log(rank, suit, side);
     if (side === 'front') {
         cartElement
@@ -198,65 +196,6 @@ function renderCart(id) {
             },
         ],
     };
-}
-
-{
-    /* <div class="screen">
-    <div class="game">
-        <div class="header">
-            <div class="timer">
-                <div class="timer__min">
-                    <div class="timer__label">min</div>
-                    <div class="timer__value">00</div>
-                </div>
-                <div class="timer__value">.</div>
-                <div class="timer__sec">
-                    <div class="timer__label">sec</div>
-                    <div class="timer__value">00</div>
-                </div>
-            </div>
-            <button class="button">Начать заново</button>
-        </div>
-        <div class="field">
-            <div class="cart">1</div>
-            <div class="cart">2</div>
-            <div class="cart">3</div>
-            <div class="cart">4</div>
-            <div class="cart">5</div>
-            <div class="cart">6</div>
-            <div class="cart">7</div>
-            <div class="cart">8</div>
-            <div class="cart">9</div>
-            <div class="cart">10</div>
-            <div class="cart">11</div>
-            <div class="cart">12</div>
-            <div class="cart">13</div>
-            <div class="cart">14</div>
-            <div class="cart">15</div>
-            <div class="cart">16</div>
-            <div class="cart">17</div>
-            <div class="cart">18</div>
-            <div class="cart">19</div>
-            <div class="cart">20</div>
-            <div class="cart">21</div>
-            <div class="cart">22</div>
-            <div class="cart">23</div>
-            <div class="cart">24</div>
-            <div class="cart">25</div>
-            <div class="cart">26</div>
-            <div class="cart">27</div>
-            <div class="cart">28</div>
-            <div class="cart">29</div>
-            <div class="cart">30</div>
-            <div class="cart">31</div>
-            <div class="cart">32</div>
-            <div class="cart">33</div>
-            <div class="cart">34</div>
-            <div class="cart">35</div>
-            <div class="cart">36</div>
-        </div>
-    </div>
-</div> */
 }
 
 export { renderGameScreen };
