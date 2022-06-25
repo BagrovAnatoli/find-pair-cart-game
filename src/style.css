@@ -4,11 +4,11 @@
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: sans-serif;
 }
 
 .screen {
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   background-color: #004980;
 }
@@ -31,7 +31,7 @@ body {
   width: 480px;
   height: 459px;
   border-radius: 12px;
-  background-color: #C2F5FF;
+  background-color: #c2f5ff;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -50,7 +50,7 @@ body {
 .window__title {
   width: 250px;
   color: #004980;
-  font-family: 'StratosSkyeng', sans-serif;
+  font-family: sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 40px;
@@ -65,9 +65,9 @@ body {
   height: 50px;
   border: none;
   border-radius: 12px;
-  background-color: #7AC100;
+  background-color: #7ac100;
   color: #fff;
-  font-family: 'StratosSkyeng', sans-serif;
+  font-family: sans-serif;
   font-style: normal;
   font-size: 24px;
   cursor: pointer;
@@ -88,8 +88,8 @@ body {
   height: 98px;
   border-radius: 12px;
   background-color: #fff;
-  color: #0080C1;
-  font-family: 'StratosSkyeng', sans-serif;
+  color: #0080c1;
+  font-family: sans-serif;
   font-style: normal;
   font-size: 64px;
   display: -webkit-box;
@@ -111,8 +111,8 @@ body {
 .difficulty__button_selected {
   -webkit-transform: scale(1.05);
           transform: scale(1.05);
-  -webkit-box-shadow: 10px 5px 5px #0080C1;
-          box-shadow: 10px 5px 5px #0080C1;
+  -webkit-box-shadow: 10px 5px 5px #0080c1;
+          box-shadow: 10px 5px 5px #0080c1;
 }
 
 .game {
@@ -179,10 +179,16 @@ body {
 }
 
 .cart {
-  width: 95px;
-  height: 133px;
-  background-image: url(./img/shirt.svg);
   margin: 10px 0;
   cursor: pointer;
+}
+
+.cart__front, .cart__back {
+  width: 95px;
+  height: 133px;
+}
+
+.cart__front_hidden, .cart__back_hidden {
+  display: none;
 }
 /*# sourceMappingURL=style.css.map */

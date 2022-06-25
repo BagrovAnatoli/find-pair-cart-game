@@ -1,3 +1,7 @@
+import { templateEngine } from './lib/templateEngine.js';
+import { clearElement } from './lib/utilityFunctions.js';
+import { renderGameScreen } from './gameScreen.js';
+
 function renderFirstScreen(component) {
     component.appendChild(templateEngine(firstScreenTemplate()));
 
@@ -21,7 +25,7 @@ function setDifficultyHandler(component) {
 
 function clearSelect(difficultyBlock) {
     const buttons = difficultyBlock.querySelectorAll('.difficulty__button');
-    buttons.forEach(button => {
+    buttons.forEach((button) => {
         button.classList.remove('difficulty__button_selected');
     });
 }
@@ -32,7 +36,6 @@ function setStartHandler(component) {
         event.preventDefault;
         console.log(`Открыть игру на сложности ${window.appState.difficulty}`);
         clearElement(component);
-        window.timer.run();
         renderGameScreen(component);
     });
 }
@@ -51,7 +54,7 @@ function firstScreenTemplate() {
                     {
                         tag: 'div',
                         cls: 'window__title',
-                        content: 'Выбери сложность'
+                        content: 'Выбери сложность',
                     },
                     {
                         tag: 'div',
@@ -60,18 +63,18 @@ function firstScreenTemplate() {
                             templateDifficultyButton('low'),
                             templateDifficultyButton('medium'),
                             templateDifficultyButton('high'),
-                        ]
+                        ],
                     },
                     {
                         tag: 'button',
                         cls: ['button', 'window__button'],
-                        content: 'Старт'
-                    }
-                ]
-            }
-        }
-    }
-};
+                        content: 'Старт',
+                    },
+                ],
+            },
+        },
+    };
+}
 
 function templateDifficultyButton(difficulty) {
     return {
@@ -80,20 +83,8 @@ function templateDifficultyButton(difficulty) {
         attrs: {
             'data-difficulty': `${difficulty}`,
         },
-        content: `${window.DIFFICULTIES[difficulty].buttonText}`
-    }
+        content: `${window.DIFFICULTIES[difficulty].buttonText}`,
+    };
 }
 
-{/* <div class="screen">
-    <div class="window">
-        <div class="window__content">
-            <div class="window__title">Выбери сложность</div>
-            <div class="difficulty">
-                <div class="difficulty__button" data-difficulty="1">1</div>
-                <div class="difficulty__button" data-difficulty="2">2</div>
-                <div class="difficulty__button" data-difficulty="3">3</div>
-            </div>
-            <button class="button window__button">Старт</button>
-        </div>
-    </div>
-</div> */}
+export { renderFirstScreen };
