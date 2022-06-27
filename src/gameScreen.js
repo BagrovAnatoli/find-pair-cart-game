@@ -3,6 +3,8 @@ import { clearElement } from './lib/utilityFunctions.js';
 import { renderFirstScreen } from './firstScreen.js';
 import { appElement } from './main.js';
 
+const imgPath = './static';
+
 function renderGameScreen(component) {
     console.log(`Игра на сложности ${window.appState.difficulty}`);
     component.appendChild(templateEngine(gameScreenTemplate()));
@@ -184,14 +186,14 @@ function renderCart(id) {
                 tag: 'div',
                 cls: ['cart__front'],
                 attrs: {
-                    style: `background-image: url('./src/img/${rank}_${suit}.svg');`,
+                    style: `background-image: url('${imgPath}/${rank.toLowerCase()}_${suit}.svg');`,
                 },
             },
             {
                 tag: 'div',
                 cls: ['cart__back', 'cart__back_hidden'],
                 attrs: {
-                    style: `background-image: url('./src/img/shirt.svg');`,
+                    style: `background-image: url('${imgPath}/shirt.svg');`,
                 },
             },
         ],

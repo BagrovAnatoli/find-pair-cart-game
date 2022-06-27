@@ -1,3 +1,4 @@
+import './style.css';
 import { Timer } from './timer.js';
 import { renderFirstScreen } from './firstScreen.js';
 import { mixArrays } from './lib/utilityFunctions.js';
