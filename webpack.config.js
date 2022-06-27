@@ -2,6 +2,8 @@ const path = require('path');
 //const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -23,7 +25,7 @@ module.exports = {
             // },
             {
                 test: /\.scss|css$/,
-                use: ['style-loader', 'css-loader', 'sass-loader'],
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
             },
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -35,7 +37,12 @@ module.exports = {
             },
         ],
     },
+    optimization: {
+        minimizer: ['...', new CssMinimizerPlugin()],
+    },
+    devtool: isProduction ? 'hidden-source-map' : 'source-map',
     plugins: [
+        new MiniCssExtractPlugin(),
         new CopyPlugin({
             patterns: [{ from: './src/img', to: 'static' }],
         }),
