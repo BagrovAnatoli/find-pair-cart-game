@@ -18,4 +18,21 @@ function mixArrays(array1, array2, prop1Name, prop2Name) {
     return resultArray;
 }
 
-export { clearElement, mixArrays };
+function takeCarts(count, set) {
+    let cartSet = [...set];
+    const takedCarts = [];
+    for (let i = 0; i < count; i++) {
+        const randomIndex = Math.floor(Math.random() * cartSet.length);
+        takedCarts.push(cartSet.splice(randomIndex, 1)[0]);
+    }
+    return takedCarts;
+}
+
+function takeCartsForPlay(cartsCunt) {
+    const pairsCount = Math.floor(cartsCunt / 2);
+    const uniqCarts = takeCarts(pairsCount, window.CARTS);
+    const cartsForPlay = [...uniqCarts, ...uniqCarts];
+    return takeCarts(cartsForPlay.length, cartsForPlay);
+}
+
+export { clearElement, mixArrays, takeCartsForPlay };

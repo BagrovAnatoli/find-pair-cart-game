@@ -1,5 +1,5 @@
 import { templateEngine } from './lib/templateEngine.js';
-import { clearElement } from './lib/utilityFunctions.js';
+import { clearElement, takeCartsForPlay } from './lib/utilityFunctions.js';
 import { renderFirstScreen } from './firstScreen.js';
 import { appElement } from './main.js';
 
@@ -37,14 +37,57 @@ function setTimer(component) {
 
 function setCartClickHandler(component) {
     const cartsField = component.querySelector('.field');
-    cartsField.addEventListener('click', (event) => {
+    const doCheck = createChecker();
+    cartsField.addEventListener('click', cartClickHandler);
+
+    function cartClickHandler(event) {
         const { target } = event;
         const cart = target.closest('.cart');
-        if (!cart) {
+        if (!cart || cart.dataset.side === 'front') {
             return;
         }
         turnCart(cart);
-    });
+        processResult(doCheck(cart));
+    }
+
+    function processResult(result) {
+        if (result !== 'ok') {
+            cartsField.removeEventListener('click', cartClickHandler);
+            window.timer.clear();
+        }
+        if (result === 'win') {
+            alert('Поздравляем, у вас отличная память!');
+        }
+        if (result === 'lose') {
+            alert('Увы. Может следующий раз будет более удачным...');
+        }
+    }
+}
+
+function createChecker() {
+    let counter = 0;
+    let previousCart = null;
+    let isEqual;
+    const difficulty = window.appState.difficulty;
+    const cartsCount = window.DIFFICULTIES[difficulty].cartsCount;
+    function doCheck(cart) {
+        counter = counter + 1;
+        if (counter % 2 === 1) {
+            previousCart = cart;
+            return 'ok';
+        } else {
+            isEqual = previousCart.dataset.id === cart.dataset.id;
+            if (!isEqual) {
+                return 'lose';
+            } else {
+                if (counter === cartsCount) {
+                    return 'win';
+                }
+                return 'ok';
+            }
+        }
+    }
+    return doCheck;
 }
 
 function turnCart(cartElement) {
@@ -158,20 +201,15 @@ function setGridStyle() {
 
 function renderCarts() {
     const difficulty = window.appState.difficulty;
-    const carts = [];
     const cartsCount = window.DIFFICULTIES[difficulty].cartsCount;
     console.log('Количество карт: ' + cartsCount);
-    for (let i = 1; i <= cartsCount; i++) {
-        const id = i;
-        carts.push(renderCart(id));
-    }
-    return carts;
+    const carts = takeCartsForPlay(cartsCount);
+    return carts.map(renderCart);
 }
 
-function renderCart(id) {
+function renderCart(cart) {
+    const { suit, rank, id } = cart;
     console.log('Карта № ' + id);
-    const cart = window.CARTS[id - 1];
-    const { suit, rank } = cart;
     return {
         tag: 'div',
         cls: 'cart',
