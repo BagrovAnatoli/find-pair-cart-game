@@ -1,7 +1,7 @@
-import { templateEngine } from './lib/templateEngine.js';
-import { clearElement, takeCartsForPlay } from './lib/utilityFunctions.js';
-import { renderFirstScreen } from './firstScreen.js';
-import { appElement } from './main.js';
+import { templateEngine } from './lib/templateEngine';
+import { clearElement, takeCartsForPlay } from './lib/utilityFunctions';
+import { renderFirstScreen } from './firstScreen';
+import { appElement } from './main';
 
 const imgPath = './static';
 
@@ -66,17 +66,17 @@ function setCartClickHandler(component) {
 
 function createChecker() {
     let counter = 0;
-    let previousCart = null;
+    let previousCart: HTMLElement | null = null;
     let isEqual;
     const difficulty = window.appState.difficulty;
     const cartsCount = window.DIFFICULTIES[difficulty].cartsCount;
-    function doCheck(cart) {
+    function doCheck(cart: HTMLElement | null) {
         counter = counter + 1;
         if (counter % 2 === 1) {
             previousCart = cart;
             return 'ok';
         } else {
-            isEqual = previousCart.dataset.id === cart.dataset.id;
+            isEqual = previousCart?.dataset.id === cart?.dataset.id;
             if (!isEqual) {
                 return 'lose';
             } else {

@@ -1,9 +1,18 @@
+interface Cart {
+    id: number;
+}
+
 function clearElement(element) {
     element.textContent = '';
 }
 
-function mixArrays(array1, array2, prop1Name, prop2Name) {
-    const resultArray = [];
+function mixArrays(
+    array1: string[],
+    array2: string[],
+    prop1Name: string,
+    prop2Name: string
+) {
+    const resultArray: Cart[] = [];
     let id = 1;
     for (let i = 0; i < array1.length; i++) {
         for (let j = 0; j < array2.length; j++) {
@@ -19,8 +28,8 @@ function mixArrays(array1, array2, prop1Name, prop2Name) {
 }
 
 function takeCarts(count, set) {
-    let cartSet = [...set];
-    const takedCarts = [];
+    const cartSet = [...set];
+    const takedCarts: Cart[] = [];
     for (let i = 0; i < count; i++) {
         const randomIndex = Math.floor(Math.random() * cartSet.length);
         takedCarts.push(cartSet.splice(randomIndex, 1)[0]);
@@ -35,4 +44,4 @@ function takeCartsForPlay(cartsCunt) {
     return takeCarts(cartsForPlay.length, cartsForPlay);
 }
 
-export { clearElement, mixArrays, takeCartsForPlay };
+export { clearElement, mixArrays, takeCartsForPlay, Cart };

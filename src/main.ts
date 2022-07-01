@@ -1,16 +1,41 @@
 import './style.css';
-import { Timer } from './timer.js';
-import { renderFirstScreen } from './firstScreen.js';
-import { mixArrays } from './lib/utilityFunctions.js';
+import { GameTimer } from './timer';
+import { renderFirstScreen } from './firstScreen';
+import { mixArrays, Cart } from './lib/utilityFunctions';
 
 const appElement = document.querySelector('.app');
 
+type Difficulty = {
+    buttonText: string;
+    cartsCount: number;
+    layout: {
+        rows: number;
+        columns: number;
+    };
+};
+
+declare global {
+    interface Window {
+        appState: {
+            difficulty: string;
+            gameDuration: number;
+        };
+        timer: GameTimer;
+        DIFFICULTIES: {
+            low: Difficulty;
+            medium: Difficulty;
+            high: Difficulty;
+        };
+        CARTS: Cart[];
+    }
+}
+
 window.appState = {
-    difficulty: null,
+    difficulty: '',
     gameDuration: 0,
 };
 
-window.timer = new Timer();
+window.timer = new GameTimer();
 
 window.DIFFICULTIES = {
     low: {
