@@ -2,7 +2,6 @@
     "name": "git-game-project",
     "version": "1.0.0",
     "description": "Моя реализация игры из четвёртого модуля курса SkyPRO.\r Суть этой карточной игры: вам нужно выбрать все пары карт.",
-    "main": ".index.html",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "format": "prettier --config .prettierrc.json ./src/**.{js,ts} --write",
