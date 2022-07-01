@@ -2,10 +2,8 @@
     "name": "git-game-project",
     "version": "1.0.0",
     "description": "Моя реализация игры из четвёртого модуля курса SkyPRO.\r Суть этой карточной игры: вам нужно выбрать все пары карт.",
-    "main": ".index.html",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "run": "http-server -p 3001",
         "format": "prettier --write .",
         "lint:js": "eslint ./src/**.js --fix",
         "lint:scss": "stylelint ./src/**/*.scss",

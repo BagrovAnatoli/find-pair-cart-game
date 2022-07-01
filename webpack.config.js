@@ -16,13 +16,6 @@ module.exports = {
     },
     module: {
         rules: [
-            // {
-            //     test: /\.scss$/,
-            //     use: ExtractTextPlugin.extract({
-            //         fallback: 'style-loader',
-            //         use: ['style-loader', 'css-loader'],
-            //     }),
-            // },
             {
                 test: /\.scss|css$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
