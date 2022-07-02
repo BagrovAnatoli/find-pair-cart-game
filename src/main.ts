@@ -3,7 +3,7 @@ import { GameTimer } from './timer';
 import { renderFirstScreen } from './firstScreen';
 import { mixArrays, Cart } from './lib/utilityFunctions';
 
-const appElement = document.querySelector('.app');
+const appElement: HTMLElement | null = document.querySelector('.app');
 
 type Difficulty = {
     buttonText: string;
@@ -72,6 +72,8 @@ window.CARTS = mixArrays(SUITS, RANKS, 'suit', 'rank');
 
 console.log(window.CARTS);
 
-renderFirstScreen(appElement);
+if (appElement !== null) {
+    renderFirstScreen(appElement);
+}
 
 export { appElement };

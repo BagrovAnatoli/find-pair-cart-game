@@ -2,6 +2,7 @@ import { templateEngine } from './lib/templateEngine';
 import { clearElement, takeCartsForPlay } from './lib/utilityFunctions';
 import { renderFirstScreen } from './firstScreen';
 import { appElement } from './main';
+import { Cart } from './lib/utilityFunctions';
 
 const imgPath = './static';
 
@@ -20,39 +21,44 @@ function renderGameScreen(component) {
     }, 5000);
 }
 
-function setPlayAgainHandler(component) {
+function setPlayAgainHandler(component: HTMLElement) {
     const button = component.querySelector('.button');
-    button.addEventListener('click', () => {
+    button?.addEventListener('click', () => {
         clearElement(component);
-        renderFirstScreen(appElement);
-        window.timer.clear();
+        if (appElement !== null) {
+            renderFirstScreen(appElement);
+            window.timer.clear();
+        }
     });
 }
 
-function setTimer(component) {
+function setTimer(component: HTMLElement) {
     const minutesElement = component.querySelector('.timer__min .timer__value');
     const secondsElement = component.querySelector('.timer__sec .timer__value');
     window.timer.setTimeElements(minutesElement, secondsElement);
 }
 
-function setCartClickHandler(component) {
+function setCartClickHandler(component: HTMLElement) {
     const cartsField = component.querySelector('.field');
     const doCheck = createChecker();
-    cartsField.addEventListener('click', cartClickHandler);
+    cartsField?.addEventListener('click', cartClickHandler);
 
-    function cartClickHandler(event) {
+    function cartClickHandler(event: Event) {
         const { target } = event;
+        if (!(target instanceof HTMLElement)) {
+            return;
+        }
         const cart = target.closest('.cart');
-        if (!cart || cart.dataset.side === 'front') {
+        if (!(cart instanceof HTMLElement) || cart.dataset.side === 'front') {
             return;
         }
         turnCart(cart);
         processResult(doCheck(cart));
     }
 
-    function processResult(result) {
+    function processResult(result: string) {
         if (result !== 'ok') {
-            cartsField.removeEventListener('click', cartClickHandler);
+            cartsField?.removeEventListener('click', cartClickHandler);
             window.timer.clear();
         }
         if (result === 'win') {
@@ -65,18 +71,18 @@ function setCartClickHandler(component) {
 }
 
 function createChecker() {
-    let counter = 0;
-    let previousCart: HTMLElement | null = null;
-    let isEqual;
-    const difficulty = window.appState.difficulty;
-    const cartsCount = window.DIFFICULTIES[difficulty].cartsCount;
-    function doCheck(cart: HTMLElement | null) {
+    let counter: number = 0;
+    let previousCart: HTMLElement;
+    let isEqual: boolean;
+    const difficulty: string = window.appState.difficulty;
+    const cartsCount: number = window.DIFFICULTIES[difficulty].cartsCount;
+    function doCheck(cart: HTMLElement) {
         counter = counter + 1;
         if (counter % 2 === 1) {
             previousCart = cart;
             return 'ok';
         } else {
-            isEqual = previousCart?.dataset.id === cart?.dataset.id;
+            isEqual = previousCart.dataset.id === cart?.dataset.id;
             if (!isEqual) {
                 return 'lose';
             } else {
@@ -207,7 +213,7 @@ function renderCarts() {
     return carts.map(renderCart);
 }
 
-function renderCart(cart) {
+function renderCart(cart: Cart) {
     const { suit, rank, id } = cart;
     console.log('Карта № ' + id);
     return {
@@ -224,7 +230,7 @@ function renderCart(cart) {
                 tag: 'div',
                 cls: ['cart__front'],
                 attrs: {
-                    style: `background-image: url('${imgPath}/${rank.toLowerCase()}_${suit}.svg');`,
+                    style: `background-image: url('${imgPath}/${rank?.toLowerCase()}_${suit}.svg');`,
                 },
             },
             {

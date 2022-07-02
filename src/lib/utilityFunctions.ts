@@ -1,5 +1,7 @@
 interface Cart {
     id: number;
+    suit?: string;
+    rank?: string;
 }
 
 function clearElement(element) {
