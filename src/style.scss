@@ -22,6 +22,9 @@ body {
 .window {
     height: 100vh;
     width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,7 +41,7 @@ body {
     }
 
     &__title {
-        width: 250px;
+        width: 300px;
         color: #004980;
         font-family: sans-serif;
         font-style: normal;
@@ -47,6 +50,22 @@ body {
         line-height: 48px;
         text-align: center;
         font-feature-settings: 'pnum' on, 'lnum' on;
+    }
+}
+
+.time-spent {
+    font-weight: 400;
+    color: black;
+    text-align: center;
+
+    &__text {
+        font-size: 24px;
+        line-height: 32px;
+    }
+
+    &__time {
+        font-size: 64px;
+        line-height: 72px;
     }
 }
 

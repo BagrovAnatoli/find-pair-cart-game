@@ -11,7 +11,7 @@ function renderGameScreen(component) {
     component.appendChild(templateEngine(gameScreenTemplate()));
 
     setTimer(component);
-    setPlayAgainHandler(component);
+    setPlayAgainHandler(component, '.button');
     const timeoutForRemember = setTimeout(() => {
         console.log('5 секунд прошли');
         turnAllCards(component);
@@ -21,8 +21,8 @@ function renderGameScreen(component) {
     }, 5000);
 }
 
-function setPlayAgainHandler(component: HTMLElement) {
-    const button = component.querySelector('.button');
+function setPlayAgainHandler(component: HTMLElement, selector: string) {
+    const button = component.querySelector(selector);
     button?.addEventListener('click', () => {
         clearElement(component);
         if (appElement !== null) {
@@ -58,16 +58,34 @@ function setCartClickHandler(component: HTMLElement) {
 
     function processResult(result: string) {
         if (result !== 'ok') {
+            let message: string = '';
+            let image: string = '';
             cartsField?.removeEventListener('click', cartClickHandler);
             window.timer.clear();
-        }
-        if (result === 'win') {
-            alert('Поздравляем, у вас отличная память!');
-        }
-        if (result === 'lose') {
-            alert('Увы. Может следующий раз будет более удачным...');
+            if (result === 'win') {
+                image = './static/end_win.svg';
+                message = 'Вы выиграли!';
+            }
+            if (result === 'lose') {
+                image = './static/end_lose.svg';
+                message = 'Вы проиграли!';
+            }
+            const minutes: number = window.timer.getMinutes();
+            const seconds: number = window.timer.getSeconds();
+            const duration: string = `${minutes}.${window.timer.formatValues(
+                seconds
+            )}`;
+            showResult(component, endWindowTemplate(image, message, duration));
+            setPlayAgainHandler(component, '.window .button');
         }
     }
+}
+
+function showResult(component, template) {
+    const screenElement = component.querySelector('.screen');
+    const gameElement = component.querySelector('.game');
+    gameElement.style = 'opacity: 0.3;';
+    screenElement.appendChild(templateEngine(template));
 }
 
 function createChecker() {
@@ -82,7 +100,7 @@ function createChecker() {
             previousCart = cart;
             return 'ok';
         } else {
-            isEqual = previousCart.dataset.id === cart?.dataset.id;
+            isEqual = previousCart.dataset.id === cart.dataset.id;
             if (!isEqual) {
                 return 'lose';
             } else {
@@ -191,6 +209,55 @@ function gameScreenTemplate() {
                     cls: 'field',
                     attrs: setGridStyle(),
                     content: renderCarts(),
+                },
+            ],
+        },
+    };
+}
+
+function endWindowTemplate(image: string, message: string, duration: string) {
+    return {
+        tag: 'div',
+        cls: 'window',
+        content: {
+            tag: 'div',
+            cls: 'window__content',
+            content: [
+                {
+                    tag: 'div',
+                    cls: 'window__image',
+                    content: {
+                        tag: 'img',
+                        attrs: {
+                            src: image,
+                        },
+                    },
+                },
+                {
+                    tag: 'div',
+                    cls: 'window__title',
+                    content: message,
+                },
+                {
+                    tag: 'div',
+                    cls: ['window__time-spent', 'time-spent'],
+                    content: [
+                        {
+                            tag: 'div',
+                            cls: 'time-spent__text',
+                            content: 'Затраченное время:',
+                        },
+                        {
+                            tag: 'div',
+                            cls: 'time-spent__time',
+                            content: duration,
+                        },
+                    ],
+                },
+                {
+                    tag: 'button',
+                    cls: ['button', 'window__button'],
+                    content: 'Играть снова',
                 },
             ],
         },
