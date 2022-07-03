@@ -19,6 +19,7 @@ declare global {
         appState: {
             difficulty: string;
             gameDuration: number;
+            status: string;
         };
         timer: GameTimer;
         DIFFICULTIES: {
@@ -27,12 +28,27 @@ declare global {
             high: Difficulty;
         };
         CARTS: Cart[];
+        STATUSES: {
+            ok: string;
+            win: string;
+            lose: string;
+        };
+        END_MESSAGE: {
+            win: string;
+            lose: string;
+        };
+        END_IMAGE_PATH: {
+            win: string;
+            lose: string;
+        };
+        OPACITY: number;
     }
 }
 
 window.appState = {
     difficulty: '',
     gameDuration: 0,
+    status: '',
 };
 
 window.timer = new GameTimer();
@@ -69,6 +85,24 @@ const SUITS = ['hearts', 'diamonds', 'crosses', 'spades'];
 const RANKS = ['6', '7', '8', '9', '10', 'Q', 'K', 'J', 'A'];
 
 window.CARTS = mixArrays(SUITS, RANKS, 'suit', 'rank');
+
+window.STATUSES = {
+    ok: 'ok',
+    win: 'win',
+    lose: 'lose',
+};
+
+window.END_MESSAGE = {
+    win: 'Вы выиграли!',
+    lose: 'Вы проиграли',
+};
+
+window.END_IMAGE_PATH = {
+    win: './static/end_win.svg',
+    lose: './static/end_lose.svg',
+};
+
+window.OPACITY = 0.3;
 
 console.log(window.CARTS);
 

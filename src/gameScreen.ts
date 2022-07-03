@@ -57,25 +57,22 @@ function setCartClickHandler(component: HTMLElement) {
     }
 
     function processResult(result: string) {
-        if (result !== 'ok') {
-            let message: string = '';
-            let image: string = '';
+        if (result !== window.STATUSES.ok) {
             cartsField?.removeEventListener('click', cartClickHandler);
             window.timer.clear();
-            if (result === 'win') {
-                image = './static/end_win.svg';
-                message = 'Вы выиграли!';
-            }
-            if (result === 'lose') {
-                image = './static/end_lose.svg';
-                message = 'Вы проиграли!';
-            }
             const minutes: number = window.timer.getMinutes();
             const seconds: number = window.timer.getSeconds();
             const duration: string = `${minutes}.${window.timer.formatValues(
                 seconds
             )}`;
-            showResult(component, endWindowTemplate(image, message, duration));
+            showResult(
+                component,
+                endWindowTemplate(
+                    window.END_IMAGE_PATH[result],
+                    window.END_MESSAGE[result],
+                    duration
+                )
+            );
             setPlayAgainHandler(component, '.window .button');
         }
     }
@@ -84,7 +81,7 @@ function setCartClickHandler(component: HTMLElement) {
 function showResult(component, template) {
     const screenElement = component.querySelector('.screen');
     const gameElement = component.querySelector('.game');
-    gameElement.style = 'opacity: 0.3;';
+    gameElement.style = `opacity: ${window.OPACITY};`;
     screenElement.appendChild(templateEngine(template));
 }
 
@@ -98,16 +95,16 @@ function createChecker() {
         counter = counter + 1;
         if (counter % 2 === 1) {
             previousCart = cart;
-            return 'ok';
+            return window.STATUSES.ok;
         } else {
             isEqual = previousCart.dataset.id === cart.dataset.id;
             if (!isEqual) {
-                return 'lose';
+                return window.STATUSES.lose;
             } else {
                 if (counter === cartsCount) {
-                    return 'win';
+                    return window.STATUSES.win;
                 }
-                return 'ok';
+                return window.STATUSES.ok;
             }
         }
     }
