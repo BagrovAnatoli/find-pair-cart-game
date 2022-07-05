@@ -4,7 +4,7 @@ interface Cart {
     rank?: string;
 }
 
-function clearElement(element) {
+function clearElement(element: HTMLElement) {
     element.textContent = '';
 }
 
@@ -29,7 +29,7 @@ function mixArrays(
     return resultArray;
 }
 
-function takeCarts(count, set) {
+function takeCarts(count: number, set: Cart[]) {
     const cartSet = [...set];
     const takedCarts: Cart[] = [];
     for (let i = 0; i < count; i++) {
@@ -39,7 +39,7 @@ function takeCarts(count, set) {
     return takedCarts;
 }
 
-function takeCartsForPlay(cartsCunt) {
+function takeCartsForPlay(cartsCunt: number) {
     const pairsCount = Math.floor(cartsCunt / 2);
     const uniqCarts = takeCarts(pairsCount, window.CARTS);
     const cartsForPlay = [...uniqCarts, ...uniqCarts];
