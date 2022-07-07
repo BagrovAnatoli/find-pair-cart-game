@@ -50,4 +50,19 @@ describe('takeCarts', () => {
         expect(taked2).toHaveLength(10);
         expect(taked3).toHaveLength(0);
     });
+
+    it('should check that the output structure is the same as an input', () => {
+        const set = [
+            {
+                id: 1,
+                suit: 'hearts',
+                rank: '6',
+            },
+        ];
+
+        const taked = takeCarts(1, set);
+
+        // expect(taked[0]).toBeInstanceOf(Cart);
+        expect(taked).toEqual(set);
+    });
 });
