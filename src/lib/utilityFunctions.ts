@@ -30,6 +30,9 @@ function mixArrays(
 }
 
 function takeCarts(count: number, set: Cart[]) {
+    if (count > set.length) {
+        count = set.length;
+    }
     const cartSet = [...set];
     const takedCarts: Cart[] = [];
     for (let i = 0; i < count; i++) {
@@ -46,4 +49,4 @@ function takeCartsForPlay(cartsCunt: number) {
     return takeCarts(cartsForPlay.length, cartsForPlay);
 }
 
-export { clearElement, mixArrays, takeCartsForPlay, Cart };
+export { clearElement, mixArrays, takeCartsForPlay, Cart, takeCarts };
