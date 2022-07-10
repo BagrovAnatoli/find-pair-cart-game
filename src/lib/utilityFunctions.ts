@@ -42,7 +42,7 @@ function takeCarts(count: number, set: Cart[]) {
     return takedCarts;
 }
 
-function takeCartsForPlay(cartsCunt: number, window?) {
+function takeCartsForPlay(cartsCunt: number) {
     const pairsCount = Math.floor(cartsCunt / 2);
     const uniqCarts = takeCarts(pairsCount, window.CARTS);
     const cartsForPlay = [...uniqCarts, ...uniqCarts];

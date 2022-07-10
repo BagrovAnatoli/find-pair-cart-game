@@ -73,18 +73,21 @@ describe('takeCarts', () => {
 
 describe('takeCartsForPlay', () => {
     it('should return the right amount', () => {
-        const window = {
-            CARTS: [
-                {
-                    id: 1,
-                    suit: 'hearts',
-                    rank: '6',
-                },
-            ],
-        };
+        Object.defineProperty(global, 'window', {
+            value: {
+                CARTS: [
+                    {
+                        id: 1,
+                        suit: 'hearts',
+                        rank: '6',
+                    },
+                ],
+            },
+            writable: true,
+        });
         const count = 2;
 
-        const takedCarts = takeCartsForPlay(count, window);
+        const takedCarts = takeCartsForPlay(count);
 
         expect(takedCarts).toHaveLength(count);
     });
