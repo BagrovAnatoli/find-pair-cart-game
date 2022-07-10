@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { it, describe, expect } = require('@jest/globals');
-const { mixArrays, takeCarts, Cart } = require('./utilityFunctions');
+const {
+    mixArrays,
+    takeCarts,
+    takeCartsForPlay,
+    Cart,
+} = require('./utilityFunctions');
 
 describe('mixArrays', () => {
     it('should length 15', () => {
@@ -62,7 +67,25 @@ describe('takeCarts', () => {
 
         const taked = takeCarts(1, set);
 
-        // expect(taked[0]).toBeInstanceOf(Cart);
         expect(taked).toEqual(set);
+    });
+});
+
+describe('takeCartsForPlay', () => {
+    it('should return the right amount', () => {
+        const window = {
+            CARTS: [
+                {
+                    id: 1,
+                    suit: 'hearts',
+                    rank: '6',
+                },
+            ],
+        };
+        const count = 2;
+
+        const takedCarts = takeCartsForPlay(count, window);
+
+        expect(takedCarts).toHaveLength(count);
     });
 });
