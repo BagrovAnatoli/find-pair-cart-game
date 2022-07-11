@@ -2,16 +2,15 @@
 const { GameTimer } = require('./timer');
 
 describe('GameTimer', () => {
-    Object.defineProperty(global, 'window', {
-        value: {
-            appState: {
-                gameDuration: 0,
-            },
-        },
-        writable: true,
-    });
-
     it('should create interval by run method', () => {
+        Object.defineProperty(global, 'window', {
+            value: {
+                appState: {
+                    gameDuration: 0,
+                },
+            },
+            writable: true,
+        });
         const testTimer = new GameTimer();
 
         testTimer.run();
@@ -21,6 +20,14 @@ describe('GameTimer', () => {
     });
 
     it('should clear interval', () => {
+        Object.defineProperty(global, 'window', {
+            value: {
+                appState: {
+                    gameDuration: 0,
+                },
+            },
+            writable: true,
+        });
         const testTimer = new GameTimer();
 
         testTimer.run();
@@ -30,8 +37,15 @@ describe('GameTimer', () => {
     });
 
     it('should return 1 minute', () => {
+        Object.defineProperty(global, 'window', {
+            value: {
+                appState: {
+                    gameDuration: 60000,
+                },
+            },
+            writable: true,
+        });
         const testTimer = new GameTimer();
-        window.appState.gameDuration = 60000;
 
         const minutes = testTimer.getMinutes();
 
@@ -39,8 +53,15 @@ describe('GameTimer', () => {
     });
 
     it('should return 30 seconds', () => {
+        Object.defineProperty(global, 'window', {
+            value: {
+                appState: {
+                    gameDuration: 90000,
+                },
+            },
+            writable: true,
+        });
         const testTimer = new GameTimer();
-        window.appState.gameDuration = 90000;
 
         const minutes = testTimer.getSeconds();
 
