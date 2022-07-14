@@ -8,7 +8,7 @@ function clearElement(element: HTMLElement) {
     element.textContent = '';
 }
 
-function mixArrays(
+function multArrays(
     array1: string[],
     array2: string[],
     prop1Name: string,
@@ -49,4 +49,4 @@ function takeCartsForPlay(cartsCunt: number) {
     return takeCarts(cartsForPlay.length, cartsForPlay);
 }
 
-export { clearElement, mixArrays, takeCartsForPlay, Cart, takeCarts };
+export { clearElement, multArrays, takeCartsForPlay, Cart, takeCarts };

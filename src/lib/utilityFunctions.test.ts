@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { it, describe, expect } = require('@jest/globals');
 const {
-    mixArrays,
+    multArrays,
     takeCarts,
     takeCartsForPlay,
     Cart,
 } = require('./utilityFunctions');
 
-describe('mixArrays', () => {
+describe('multArrays', () => {
     it('should length 15', () => {
         const array1 = ['a', 'b', 'c'];
         const array2 = ['I', 'II', 'III', 'IV', 'V'];
 
-        const result = mixArrays(array1, array2, 'letter', 'romanNumerals');
+        const result = multArrays(array1, array2, 'letter', 'romanNumerals');
 
         expect(result).toHaveLength(15);
     });
@@ -23,8 +23,13 @@ describe('mixArrays', () => {
         const prop1Name = 'letter';
         const prop2Name = 'romanNumerals';
 
-        const mixedArray = mixArrays(array1, array2, prop1Name, prop2Name);
-        const propNames = Object.keys(mixedArray[0]);
+        const multipliedArray = multArrays(
+            array1,
+            array2,
+            prop1Name,
+            prop2Name
+        );
+        const propNames = Object.keys(multipliedArray[0]);
         const isIncludesNames =
             propNames.includes(prop1Name) && propNames.includes(prop2Name);
 

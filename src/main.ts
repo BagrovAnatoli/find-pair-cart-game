@@ -1,7 +1,7 @@
 import './style.css';
 import { GameTimer } from './timer';
 import { renderFirstScreen } from './firstScreen';
-import { mixArrays, Cart } from './lib/utilityFunctions';
+import { multArrays, Cart } from './lib/utilityFunctions';
 
 const appElement: HTMLElement | null = document.querySelector('.app');
 
@@ -84,7 +84,7 @@ const SUITS = ['hearts', 'diamonds', 'crosses', 'spades'];
 
 const RANKS = ['6', '7', '8', '9', '10', 'Q', 'K', 'J', 'A'];
 
-window.CARTS = mixArrays(SUITS, RANKS, 'suit', 'rank');
+window.CARTS = multArrays(SUITS, RANKS, 'suit', 'rank');
 
 window.STATUSES = {
     ok: 'ok',
