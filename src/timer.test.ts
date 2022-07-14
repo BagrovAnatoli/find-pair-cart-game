@@ -33,7 +33,7 @@ describe('GameTimer', () => {
         testTimer.run();
         testTimer.clear();
 
-        expect(testTimer.interval._destroyed).toBeTruthy();
+        expect(testTimer.interval._destroyed).toBe(true);
     });
 
     it('should return 1 minute', () => {

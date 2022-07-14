@@ -28,7 +28,7 @@ describe('mixArrays', () => {
         const isIncludesNames =
             propNames.includes(prop1Name) && propNames.includes(prop2Name);
 
-        expect(isIncludesNames).toBeTruthy();
+        expect(isIncludesNames).toBe(true);
     });
 });
 
