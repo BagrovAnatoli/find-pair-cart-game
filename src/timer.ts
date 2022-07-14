@@ -1,4 +1,7 @@
-export class Timer {
+export class GameTimer {
+    interval;
+    minutesElement;
+    secondsElement;
     constructor() {
         console.log('new Timer');
         console.log(window.appState.gameDuration);
@@ -34,7 +37,7 @@ export class Timer {
     }
 
     formatValues(value) {
-        return String(value).padStart(2, 0);
+        return String(value).padStart(2, '0');
     }
 
     setTimeElements(minutesEment, secondsElement) {

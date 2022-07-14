@@ -1,8 +1,8 @@
-import { templateEngine } from './lib/templateEngine.js';
-import { clearElement } from './lib/utilityFunctions.js';
-import { renderGameScreen } from './gameScreen.js';
+import { templateEngine } from './lib/templateEngine';
+import { clearElement } from './lib/utilityFunctions';
+import { renderGameScreen } from './gameScreen';
 
-function renderFirstScreen(component) {
+function renderFirstScreen(component: HTMLElement) {
     component.appendChild(templateEngine(firstScreenTemplate()));
 
     setDifficultyHandler(component);
@@ -10,29 +10,38 @@ function renderFirstScreen(component) {
     setStartHandler(component);
 }
 
-function setDifficultyHandler(component) {
+function setDifficultyHandler(component: HTMLElement) {
     const difficultyBlock = component.querySelector('.difficulty');
+    if (!(difficultyBlock instanceof HTMLElement)) {
+        return;
+    }
     difficultyBlock.addEventListener('click', (event) => {
-        const target = event.target;
-        clearSelect(difficultyBlock);
-        if (target.classList.contains('difficulty__button')) {
-            window.appState.difficulty = target.dataset.difficulty;
-            console.log(`Выбрана сложность ${window.appState.difficulty}`);
-            target.classList.add('difficulty__button_selected');
+        if (event.target instanceof HTMLElement) {
+            const target = event.target;
+            clearSelect(difficultyBlock);
+            if (target.classList.contains('difficulty__button')) {
+                if (target.dataset.difficulty !== undefined) {
+                    window.appState.difficulty = target.dataset.difficulty;
+                    console.log(
+                        `Выбрана сложность ${window.appState.difficulty}`
+                    );
+                    target.classList.add('difficulty__button_selected');
+                }
+            }
         }
     });
 }
 
-function clearSelect(difficultyBlock) {
+function clearSelect(difficultyBlock: HTMLElement) {
     const buttons = difficultyBlock.querySelectorAll('.difficulty__button');
     buttons.forEach((button) => {
         button.classList.remove('difficulty__button_selected');
     });
 }
 
-function setStartHandler(component) {
+function setStartHandler(component: HTMLElement) {
     const startButton = component.querySelector('.button');
-    startButton.addEventListener('click', (event) => {
+    startButton?.addEventListener('click', (event) => {
         event.preventDefault;
         console.log(`Открыть игру на сложности ${window.appState.difficulty}`);
         clearElement(component);
@@ -76,7 +85,7 @@ function firstScreenTemplate() {
     };
 }
 
-function templateDifficultyButton(difficulty) {
+function templateDifficultyButton(difficulty: string) {
     return {
         tag: 'div',
         cls: 'difficulty__button',
